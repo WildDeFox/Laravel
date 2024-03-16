@@ -3,19 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class NewsController extends Controller
 {
     use NewsTrait;
-    public function index(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+    public function index(): View
     {
-        return view('news.index', [
-            'news' => $this->getNews(),
+        return \view('news.index', [
+            'newsList' => $this->getNews()
         ]);
     }
 
-    public function show(int $id): array
+    public function show(int $id): View
     {
-        return $this->getNews($id);
+        return \view('news.show', [
+            'news' => $this->getNews($id)
+        ]);
     }
 }
